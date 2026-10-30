@@ -76,7 +76,7 @@ class MainWindow(QMainWindow):
         self.search_btn = QPushButton("Find & verify official TWRP")
         self.search_btn.setEnabled(False)
         self.search_btn.clicked.connect(self.search)
-        self.download_btn = QPushButton("Download verified recovery")
+        self.download_btn = QPushButton("Download recovery from matched page")
         self.download_btn.setEnabled(False)
         self.download_btn.clicked.connect(self.download)
         row.addWidget(self.scan_btn)
@@ -176,9 +176,9 @@ class MainWindow(QMainWindow):
     def download(self):
         exact = [x for x in self.pages if x.get("verification", {}).get("exact")]
         if not exact:
-            QMessageBox.warning(self, "Not verified", "No exact directory match is available.")
+            QMessageBox.warning(self, "Not verified", "No exact directory-page text match is available.")
             return
-        page, ok = QInputDialog.getItem(self, "Choose device page", "Verified official TWRP page:", [x["name"] for x in exact], 0, False)
+        page, ok = QInputDialog.getItem(self, "Choose device page", "Official TWRP page with matching model/codename text:", [x["name"] for x in exact], 0, False)
         if not ok:
             return
         selected = next(x for x in exact if x["name"] == page)
