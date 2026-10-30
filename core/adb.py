@@ -39,6 +39,7 @@ def read_device():
         "codename": "ro.product.device",
         "android": "ro.build.version.release",
         "build": "ro.build.display.id",
+        "oem_unlock_supported": "ro.oem_unlock_supported",
     }
     data = {"serial": serial, "mode": "ADB"}
     for key, prop in props.items():
